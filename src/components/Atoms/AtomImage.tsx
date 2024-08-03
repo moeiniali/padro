@@ -5,6 +5,7 @@ type Props = {
  className?: string | undefined
  width?: string | number | undefined
  height?: string | number | undefined
+ onClick?: () => void
 }
 
 const AtomImage = (props: Props) => {
@@ -13,7 +14,7 @@ const AtomImage = (props: Props) => {
 
  return (
   <>
-   <img className={props.className} src={props.src} width={props.width} height={props.height} alt="icons" />
+   <img onClick={props.onClick} className={props.className} src={props.src} width={props.width} height={props.height} alt="icons" />
   </>
  )
 }

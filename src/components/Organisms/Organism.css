@@ -1,0 +1,9 @@
+.custom-input {
+ text-align: left;
+ direction: ltr;
+}
+
+.custom-input::placeholder {
+ text-align: right;
+ direction: rtl;
+}

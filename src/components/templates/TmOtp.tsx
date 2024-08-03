@@ -1,15 +1,19 @@
 import React from 'react'
-import { OrgForm } from '../ExAllCo';
+import { OrgOtp } from '../ExAllCo';
 import { Toaster } from 'react-hot-toast';
+
+
+
 type Props = {}
 
-const TmLogin = (props: Props) => {
+const TmOtp = (props: Props) => {
  return (
   <div className='w-full h-screen bg-white flex justify-center items-center'>
    <Toaster />
-   <OrgForm />
+   <OrgOtp />
   </div>
+
  )
 }
 
-export default TmLogin;
+export default TmOtp
