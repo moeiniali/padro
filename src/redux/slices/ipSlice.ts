@@ -10,7 +10,7 @@ interface initialStateTypes {
   data?: ResponseTypes | null;
   loading: boolean;
   error: string | null;
-  
+
 }
 const initialState: initialStateTypes = {
   data: null,

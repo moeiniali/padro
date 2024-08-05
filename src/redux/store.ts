@@ -11,6 +11,8 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['Ip'],
+
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
