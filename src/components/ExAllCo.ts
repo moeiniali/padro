@@ -13,6 +13,7 @@ import OrgIpMap from "./Organisms/common/OrgIpMap";
 import OrgIpAddress from "./Organisms/OrgIpAddress";
 import IpAddressPage from "../pages/IpAddressPage";
 import TmIpLocation from "./templates/TmIpLocation";
+import Loading from "../utils/Loading";
 
 export {
  AtomText,
@@ -30,4 +31,5 @@ export {
  LoginPage,
  OtpPage,
  IpAddressPage,
+ Loading,
 }
