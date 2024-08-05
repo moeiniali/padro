@@ -9,7 +9,7 @@ type Props = {}
 const TmIpLocation = (props: Props) => {
  const loading = useAppSelector((state) => state.Ip.loading)
  return (
-  <div className='w-full h-screen bg-white flex justify-center items-center'>
+  <div className='w-full min-h-screen bg-white flex justify-center items-center'>
    <Toaster />
    {loading && (<Loading />)}
 

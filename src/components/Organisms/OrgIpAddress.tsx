@@ -6,6 +6,7 @@ import { fetchIpAddress } from '../../redux/slices/ipSlice';
 import { MlCards, Loading } from '../ExAllCo';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { ResponseTypes } from '../../redux/types';
+import { notifyError } from '../../utils/notify';
 
 
 
@@ -36,11 +37,16 @@ const OrgIpAddress = () => {
 
   const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
     if (info?.source && value) {
-      dispatch(fetchIpAddress(value))
+      if (ipv4Regex.test(value) || ipv6Regex.test(value)) {
+        console.log(value);
+
+        dispatch(fetchIpAddress(value))
+      } else {
+        notifyError('فرمت ip وارد شده صجیج نمیباشد')
+      }
     }
+
   }
-
-
 
 
   function getIpType(ip: string): 'IPv4' | 'IPv6' | '' {
@@ -58,7 +64,7 @@ const OrgIpAddress = () => {
   return (
     <>
       {loading && (<Loading />)}
-      <div className='w-full max-w-[900px] h-auto flex flex-col m-auto gap-6 p-5 text-center bg-white rounded-lg shadow '>
+      <div className='w-full max-w-[900px] h-full flex flex-col m-auto gap-6 p-5 text-center bg-white rounded-lg shadow '>
         <div className='flex gap-6 flex-col justify-center items-center  '>
           <AtomText Element="p" children="آی پی مد نظر خود را پیدا کنید" size={20} weight='500' color='#313235' />
           <AtomText Element="p" className='whitespace-pre-wrap'

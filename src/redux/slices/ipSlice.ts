@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchDate } from '../../services/fetchApi';
 import axios from 'axios';
-import { throttle } from 'lodash';
 import { ResponseTypes, AsyncThunkConfig } from '../types';
 import { notifyError } from '../../utils/notify';
 const baseUrl: string = 'https://geo.ipify.org/api/v2';
@@ -19,41 +18,36 @@ const initialState: initialStateTypes = {
 };
 
 
-// rate limited---------
 
 
-const fetchIpData = async (ipAddress: string) => {
-  const response = await axios.get(`${baseUrl}/country,city?apiKey=at_shMU15WDimBYNwXfjkuxX1MAlMxFG&ipAddress=${ipAddress}`)
-  return response;
+
+
+let requestCount = 0;
+const maxRequests = 5;
+const resetInterval = 60000;
+
+const resetRequestCount = () => {
+  requestCount = 0;
+  setTimeout(resetRequestCount, resetInterval);
 };
 
+resetRequestCount();
 
+export const throttledFetchIpData = async (ipAddress: string) => {
+  if (requestCount >= maxRequests) {
+    notifyError(' شما فقط مجاز به ارسال 5 درخواست در یک دقیقه میباشید');
+    return;
+  }
 
+  requestCount++;
 
-
-let isThrottled = false;
-
-export const throttledFetchIpData = throttle(
-  async (ipAddress: string) => {
-    if (isThrottled) {
-      notifyError(' شما فقط مجاز به ارسال 5 درخواست در یک دقیقه میباشید');
-    }
-
-    try {
-      const data = await fetchIpData(ipAddress);
-      return data;
-    } finally {
-      isThrottled = true;
-      setTimeout(() => {
-        isThrottled = false;
-      }, 60000);
-    }
-  },
-  60000 / 5,
-  { leading: false, trailing: true }
-);
-
-
+  try {
+    const response = await axios.get(`${baseUrl}/country,city?apiKey=at_shMU15WDimBYNwXfjkuxX1MAlMxFG&ipAddress=${ipAddress}`);
+    return response;
+  } catch (error) {
+    console.error('خطا در دریافت اطلاعات', error);
+  }
+};
 
 
 export const fetchIpAddress = createAsyncThunk<ResponseTypes, string, AsyncThunkConfig>(
@@ -77,7 +71,7 @@ const IpSlices = createSlice({
     builder.addCase(fetchIpAddress.pending, (state) => {
       state.loading = true;
       state.error = null;
-      
+
 
     })
       .addCase(fetchIpAddress.fulfilled, (state, action: PayloadAction<ResponseTypes>) => {
