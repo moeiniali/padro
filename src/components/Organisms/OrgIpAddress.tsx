@@ -71,7 +71,7 @@ const OrgIpAddress = () => {
   return (
     <>
       {loading && (<Loading />)}
-      <div className='w-full max-w-[900px] h-full flex flex-col m-auto gap-6 p-5 text-center bg-white rounded-lg shadow '>
+      <div dir='rtl' className='w-full max-w-[900px] h-full flex flex-col m-auto gap-6 p-5 text-center bg-white rounded-lg shadow '>
         <div className='flex gap-6 flex-col justify-center items-center  '>
           <AtomText Element="p" children="آی پی مد نظر خود را پیدا کنید" size={20} weight='500' color='#313235' />
           <AtomText Element="p" className='whitespace-pre-wrap'
