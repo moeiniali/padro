@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux';
 import userSlice from '../../redux/slices/userSlice';
 import { RootState } from '../../redux/store';
 
+// Define the prop types for the OTP input
 type OTPProps = GetProps<typeof Input.OTP>;
-
+// Define the form field types
 type FieldType = {
   otpCode?: string;
 }
@@ -22,16 +23,20 @@ const OrgOtp = () => {
   const remainingTime = useSelector((state: RootState) => state.timer.remainingTime)
 
 
-  const onChange: OTPProps['onChange'] = (otp) => {
 
+
+  // Handle OTP input change
+  const onChange: OTPProps['onChange'] = (otp) => {
+    // Add any necessary logic for OTP input chang
+    console.log(otp);
   };
 
-
+  // Shared props for the OTP input
   const sharedProps: OTPProps = {
     onChange,
   };
 
-
+  // Handle form submission
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     const validCode = '1111';
     const value = values.otpCode;
@@ -50,7 +55,7 @@ const OrgOtp = () => {
 
 
 
-
+// Validation rules for OTP input
   const otpRules = [
     { required: true, message: 'لطفا کد تایید را وارد نمایید' },
 

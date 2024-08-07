@@ -12,6 +12,7 @@ type MyComponentProps = {
 }
 
 const MlHeaderCards: React.FC<MyComponentProps> = ({ titleII, titleI, Link, Element, href, onClick }) => {
+ // Function to render different UI based on the Element type
   const handlerElem = (Element: string) => {
     switch (Element) {
       case 'login':

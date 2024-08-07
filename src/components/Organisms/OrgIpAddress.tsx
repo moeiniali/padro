@@ -11,44 +11,51 @@ import { notifyError } from '../../utils/notify';
 
 
 
+// Define types for the Search component props
 type SearchProps = GetProps<typeof Input.Search>;
-
 const OrgIpAddress = () => {
-  const dispatch = useAppDispatch()
+  // Initialize dispatch hook for redux actions
+  const dispatch = useAppDispatch();
+  // Retrieve IP data, loading state, and error state from redux store
   const { data: ipData, loading, error } = useAppSelector((state) => state.Ip);
-
+  // State to save fetched IP data
   const [savedData, setSavedData] = useState<ResponseTypes[]>([]);
-
+  // Destructure Search component from Ant Design Input
   const { Search } = Input;
-
+  // Regular expressions to validate IPv4 and IPv6 addresses
   const ipv4Regex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
   const ipv6Regex = /^(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}$/;
 
 
 
 
+  // Effect to update savedData state when new IP data is fetched
 
   useEffect(() => {
     if (ipData) {
       setSavedData((prevData) => [...prevData, ipData]);
     }
-  }, [ipData])
+  }, [ipData]);
 
+
+  // Handler function for search action
 
   const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
     if (info?.source && value) {
+      // Validate the IP address format
       if (ipv4Regex.test(value) || ipv6Regex.test(value)) {
         console.log(value);
-
+        // Dispatch action to fetch IP address details
         dispatch(fetchIpAddress(value))
       } else {
+        // Show error notification if IP format is incorrect
         notifyError('فرمت ip وارد شده صجیج نمیباشد')
       }
     }
 
   }
 
-
+  // Function to determine the type of IP address (IPv4 or IPv6
   function getIpType(ip: string): 'IPv4' | 'IPv6' | '' {
     if (ipv4Regex.test(ip)) {
       return 'IPv4';

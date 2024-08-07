@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchDate } from '../../services/fetchApi';
 import axios from 'axios';
 import { ResponseTypes, AsyncThunkConfig } from '../types';
 import { notifyError } from '../../utils/notify';
 const baseUrl: string = 'https://geo.ipify.org/api/v2';
 
+// Define the initial state of the slice
 interface initialStateTypes {
   data?: ResponseTypes | null;
   loading: boolean;
@@ -21,18 +21,18 @@ const initialState: initialStateTypes = {
 
 
 
-
+// Variables for request throttling
 let requestCount = 0;
 const maxRequests = 5;
 const resetInterval = 60000;
-
+// Function to reset the request count after the interval
 const resetRequestCount = () => {
   requestCount = 0;
   setTimeout(resetRequestCount, resetInterval);
 };
-
+// Initial call to start the reset timer
 resetRequestCount();
-
+// Function to handle throttled API requests
 export const throttledFetchIpData = async (ipAddress: string) => {
   if (requestCount >= maxRequests) {
     notifyError(' شما فقط مجاز به ارسال 5 درخواست در یک دقیقه میباشید');
@@ -49,7 +49,7 @@ export const throttledFetchIpData = async (ipAddress: string) => {
   }
 };
 
-
+// Async thunk to fetch IP address data
 export const fetchIpAddress = createAsyncThunk<ResponseTypes, string, AsyncThunkConfig>(
   'fetchIpAddress',
   async (ipAddress, thunkAPI) => {
@@ -62,7 +62,7 @@ export const fetchIpAddress = createAsyncThunk<ResponseTypes, string, AsyncThunk
   },
 )
 
-
+// Redux slice to manage IP address data
 const IpSlices = createSlice({
   name: 'IpSlices',
   initialState,

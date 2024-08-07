@@ -4,19 +4,21 @@ import { RootState, AppDispatch } from '../../../redux/store';
 import { tick, reset } from '../../../redux/slices/timerSlice';
 
 const OrgTimer: React.FC = () => {
- const dispatch: AppDispatch = useDispatch();
- const remainingTime = useSelector((state: RootState) => state.timer.remainingTime) || 60;
+ const dispatch: AppDispatch = useDispatch();// Initialize dispatch for Redux actions
+ const remainingTime = useSelector((state: RootState) => state.timer.remainingTime) || 60;// Retrieve remaining time from Redux store, defaulting to 60 seconds
 
+
+ // Effect to start the timer and dispatch tick action every second
  useEffect(() => {
   if (remainingTime > 0) {
    const timer = setInterval(() => {
     dispatch(tick());
    }, 1000);
 
-   return () => clearInterval(timer);
+   return () => clearInterval(timer);// Cleanup the interval on component unmount
   }
  }, [remainingTime, dispatch]);
-
+ // Handle reset action
  const handleReset = () => {
   dispatch(reset());
  };

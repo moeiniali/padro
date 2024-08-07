@@ -12,7 +12,6 @@ const TmIpLocation = (props: Props) => {
   <div className='w-full min-h-screen bg-white flex justify-center items-center'>
    <Toaster />
    {loading && (<Loading />)}
-
    <OrgIpAddress />
   </div>
  )

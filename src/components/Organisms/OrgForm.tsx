@@ -9,6 +9,8 @@ import { AppDispatch, RootState } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/slices/userSlice';
 
+
+// Define the form field types
 type FieldType = {
   phonNumber?: string;
 }
@@ -19,18 +21,15 @@ const OrgForm = () => {
   const dispatch: AppDispatch = useDispatch();
   const persistPhonNumber = useSelector((state: RootState) => state.user.phonNumber)
 
-
+// Effect to set persisted phone number in form if available
   useEffect(() => {
-
     if (persistPhonNumber) {
       form.setFieldsValue({ phonNumber: persistPhonNumber })
     }
-
   }, [persistPhonNumber, form])
 
-
+// Handle form submission
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-
     if (values.phonNumber) {
       dispatch(setUser({ phonNumber: values.phonNumber }));
       notifySuccess('کد تایید برای شماره همراه شما ارسال شد');
@@ -44,7 +43,7 @@ const OrgForm = () => {
 
 
 
-
+  // Validation rules for phone number input
   const phoneRules = [
     { required: true, message: 'لطفا شماره همراه خود را وارد نمایید.' },
     { pattern: RegExp("((0?9)|(\\+?989))((14)|(13)|(12)|(19)|(18)|(17)|(15)|(16)|(11)|(10)|(90)|(91)|(92)|(93)|(94)|(95)|(96)|(32)|(30)|(33)|(35)|(36)|(37)|(38)|(39)|(00)|(01)|(02)|(03)|(04)|(05)|(41)|(20)|(21)|(22)|(23)|(31)|(34)|(9910)|(9911)|(9913)|(9914)|(9999)|(999)|(990)|(9810)|(9811)|(9812)|(9813)|(9814)|(9815)|(9816)|(9817)|(998))\\W?\\d{3}\\W?\\d{4}", 'g'), message: 'شماره همراه وارد شده صحیح نمیباشد.' }

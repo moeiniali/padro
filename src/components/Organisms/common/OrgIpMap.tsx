@@ -5,8 +5,8 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 
 
 type OrgIpMapProps = {
- lat: number;
- lng: number;
+ lat: number; // Latitude coordinate for the map center
+ lng: number;// Longitude coordinate for the map center
 };
 
 const OrgIpMap: React.FC<OrgIpMapProps> = ({ lat, lng }) => {

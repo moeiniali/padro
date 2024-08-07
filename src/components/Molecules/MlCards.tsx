@@ -1,10 +1,9 @@
 import React from 'react';
 import { AtomText, OrgIpMap } from '../ExAllCo';
-import { Card, Col, Collapse } from 'antd';
+import { Col, Collapse } from 'antd';
 import type { CollapseProps } from 'antd';
 
-const { Panel } = Collapse;
-
+// Define prop types for the component
 type MyComponentProps = {
   IpAddressVal?: string;
   CountryVal?: string;
@@ -25,10 +24,11 @@ type MyComponentProps = {
   onClick?: () => void;
   ipvVal?: any;
 };
-
+// Functional component definition with destructuring props
 const MlCards: React.FC<MyComponentProps> = ({ value, Element, href, onClick, ipvVal,
   IpAddressVal, CountryVal, RegionVal, CityVal, LatitudeVal, LongitudeVal, lat, lng
 }) => {
+  // Define the content of the collapse panel
   const items: CollapseProps['items'] = [
     {
       key: '1',
@@ -51,11 +51,11 @@ const MlCards: React.FC<MyComponentProps> = ({ value, Element, href, onClick, ip
       )
     }
   ];
-
+  // Handler for collapse panel change
   const onChange = (key: string | string[]) => {
     console.log(key);
   };
-
+  // Function to render element based on the type provided
   const handlerElem = (element: string) => {
     switch (element) {
       case 'Ip':
