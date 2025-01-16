@@ -75,7 +75,7 @@ const OrgIpAddress = () => {
         <div className='flex gap-6 flex-col justify-center items-center  '>
           <AtomText Element="p" children="آی پی مد نظر خود را پیدا کنید" size={20} weight='500' color='#313235' />
           <AtomText Element="p" className='whitespace-pre-wrap'
-            children="اگر بتوانید آدرس IPv4 یا IPv6 یک کاربر اینترنت را بیابید، می توانید با استفاده از ابزار جستجوی IP ما، ایده ای از آن کشور یا جهان پیدا کنید. چه باید کرد: آدرس IP مورد نظر خود را در کادر زیر وارد کنید، سپس روی  دریافت جزئیات IP کلیک کنید."
+            children="اگر بتوانید آدرس IPv4 یا IPv6 یک کاربر اینترنت را بیابید، می توانید با استفاده از ابزار جستجوی IP ما، ایده ای از آن کشور یا جهان پیدا کنید. چه باید کرد: آدرس IP مورد نظر خود را در کادر زیر وارد کنید، سپس روی  دریافت جزئیات IP کلیک کنید.به عنوان مثال 37.153.176.20"
             size={16} weight='400' lineHeight='24px' color='#7E838F' />
 
         </div>
