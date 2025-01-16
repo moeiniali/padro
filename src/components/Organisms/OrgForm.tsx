@@ -32,7 +32,7 @@ const OrgForm = () => {
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     if (values.phonNumber) {
       dispatch(setUser({ phonNumber: values.phonNumber }));
-      notifySuccess('کد تایید برای شماره همراه شما ارسال شد');
+      notifySuccess(' کد تایید شما 1 1 1 1 میباشد.');
       setTimeout(() => {
         navigate('/otp');
       }, 2000);
@@ -53,7 +53,7 @@ const OrgForm = () => {
     <div className='w-[375px] max-h-[410px] bg-white rounded-lg py-6 px-4 border'>
       <MlHeaderCards
         Element='login'
-        titleI='به پنل مدیریت تسک پادرو خوش آمدید'
+        titleI='به IP یاب خوش آمدید.'
         titleII='برای ورود، لطفا شماره موبایل خود را وارد کنید'
       />
       <Form
