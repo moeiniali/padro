@@ -109,4 +109,4 @@ const OrgOtp = () => {
   );
 }
 
-export default OrgOtp
+export default OrgOtp;
